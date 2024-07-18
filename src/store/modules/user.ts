@@ -3,27 +3,15 @@ import UserAPI from "@/api/user";
 import { resetRouter } from "@/router";
 import { store } from "@/store";
 
-import { LoginData, LoginResult } from "@/api/auth/model";
-import { getUserInfoData } from "@/api/user/model";
+import type { LoginData } from "@/api/auth";
+import type { UserInfo } from "@/api/user";
 import { TOKEN_KEY } from "@/enums/CacheEnum";
 
 export const useUserStore = defineStore("user", () => {
-  const defaultUserInfo: getUserInfoData = {
-    username: "",
-    data: {
-      username: "",
-      id: 0,
-      nickname: null,
-      info: null,
-      avatar_id: null,
-      email: null,
-      emailBind: false,
-    },
+  const user = ref<UserInfo>({
     roles: [],
-  };
-  const userInfo = ref<getUserInfoData>(defaultUserInfo);
-
-  // const userInfo = ref<LoginResult>();
+    perms: [],
+  });
 
   /**
    * 登录
@@ -35,8 +23,8 @@ export const useUserStore = defineStore("user", () => {
     return new Promise<void>((resolve, reject) => {
       AuthAPI.login(loginData)
         .then((data) => {
-          const access_token = data.data.access_token;
-          localStorage.setItem(TOKEN_KEY, "Bearer" + " " + access_token); // Bearer eyJhbGciOiJIUzI1NiJ9.xxx.xxx
+          const { tokenType, accessToken } = data;
+          localStorage.setItem(TOKEN_KEY, tokenType + " " + accessToken); // Bearer eyJhbGciOiJIUzI1NiJ9.xxx.xxx
           resolve();
         })
         .catch((error) => {
@@ -47,7 +35,7 @@ export const useUserStore = defineStore("user", () => {
 
   // 获取信息(用户昵称、头像、角色集合、权限集合)
   function getUserInfo() {
-    return new Promise<getUserInfoData>((resolve, reject) => {
+    return new Promise<UserInfo>((resolve, reject) => {
       UserAPI.getInfo()
         .then((data) => {
           if (!data) {
@@ -58,8 +46,7 @@ export const useUserStore = defineStore("user", () => {
             reject("getUserInfo: roles must be a non-null array!");
             return;
           }
-          Object.assign(userInfo.value!, { ...data });
-          // commit("setUser", data);
+          Object.assign(user.value, { ...data });
           resolve(data);
         })
         .catch((error) => {
@@ -94,7 +81,7 @@ export const useUserStore = defineStore("user", () => {
   }
 
   return {
-    userInfo,
+    user,
     login,
     getUserInfo,
     logout,

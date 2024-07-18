@@ -8,32 +8,29 @@
     ></div>
 
     <!-- 公用侧边栏 -->
-    <Sidebar class="sidebar-container"></Sidebar>
+    <Sidebar class="sidebar-container" />
 
     <!-- 混合布局 -->
     <div v-if="layout === LayoutEnum.MIX" class="mix-container">
       <div class="mix-container__left">
-        <SidebarMenu
-          :menu-list="mixLeftMenus"
-          :base-path="activeTopMenuPath"
-        ></SidebarMenu>
+        <SidebarMenu :menu-list="mixLeftMenus" :base-path="activeTopMenuPath" />
         <div class="sidebar-toggle">
           <hamburger
             :is-active="appStore.sidebar.opened"
             @toggle-click="toggleSidebar"
-          ></hamburger>
+          />
         </div>
       </div>
 
       <div :class="{ hasTagsView: showTagsView }" class="main-container">
         <div :class="{ 'fixed-header': fixedHeader }">
-          <TagsView v-if="showTagsView"></TagsView>
+          <TagsView v-if="showTagsView" />
         </div>
-        <AppMain></AppMain>
-        <Settings v-if="defaultSettings.showSettings"></Settings>
+        <AppMain />
+        <Settings v-if="defaultSettings.showSettings" />
         <!-- 返回顶部 -->
         <el-backtop target=".main-container">
-          <svg-icon icon-class="backtop" size="24px"></svg-icon>
+          <svg-icon icon-class="backtop" size="24px" />
         </el-backtop>
       </div>
     </div>
@@ -41,14 +38,14 @@
     <!-- 左侧和顶部布局 -->
     <div v-else :class="{ hasTagsView: showTagsView }" class="main-container">
       <div :class="{ 'fixed-header': fixedHeader }">
-        <NavBar v-if="layout === 'left'"></NavBar>
-        <TagsView v-if="showTagsView"></TagsView>
+        <NavBar v-if="layout === LayoutEnum.LEFT" />
+        <TagsView v-if="showTagsView" />
       </div>
-      <AppMain></AppMain>
-      <Settings v-if="defaultSettings.showSettings"></Settings>
+      <AppMain />
+      <Settings v-if="defaultSettings.showSettings" />
       <!-- 返回顶部 -->
       <el-backtop target=".main-container">
-        <svg-icon icon-class="backtop" size="24px"></svg-icon>
+        <svg-icon icon-class="backtop" size="24px" />
       </el-backtop>
     </div>
   </div>

@@ -3,7 +3,6 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 
 export const Layout = () => import("@/layout/index.vue");
 
-import Structure from "@/layout/structure/index.vue";
 // 静态路由
 export const constantRoutes: RouteRecordRaw[] = [
   {
@@ -25,25 +24,6 @@ export const constantRoutes: RouteRecordRaw[] = [
   },
 
   {
-    // path: "/",
-    // name: "/",
-    // component: Layout,
-    // redirect: "/home/index",
-    // children: [
-    //   {
-    //     meta: { title: "个人中心" },
-    //     path: "home",
-    //     redirect: "/home/index",
-    //     component: Structure,
-    //     children: [
-    //       {
-    //         meta: { title: "首页" },
-    //         path: "index",
-    //         name: "HomeIndex",
-    //         component: () => import("@/views/home/index.vue"),
-    //       },
-    //     ],
-    //   },
     path: "/",
     name: "/",
     component: Layout,
