@@ -1,0 +1,20 @@
+# base api
+# VUE_APP_BASE_API = 'https://api.mrpp.com'
+# base web
+# VUE_APP_BASE_URL = 'https://mrpp.com'
+
+# VUE_APP_DOC_API = 'https://hololens2.cn/wp-json/wp/v2/'
+
+# GET https://baidu.com 
+
+# POST https://api.cloud-wave.com/account/v4/auth/login HTTP/1.1
+# content-type: application/json
+
+# {
+#     "username": "admin",
+#     "password": "123456"
+# }
+
+# 第一次尝试
+# GET https://hololens2.cn/wp-json/wp/v2/categories?per_page=100
+# GET https://hololens2.cn/wp-json/wp/v2/posts/74
