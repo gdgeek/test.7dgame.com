@@ -4,3 +4,4 @@ COPY package.json ./
 RUN npm install pnpm -g
 RUN pnpm install
 COPY . .
+RUN pnpm run build
