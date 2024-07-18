@@ -5,3 +5,4 @@ RUN npm install pnpm -g
 RUN pnpm install vuex
 RUN pnpm install
 COPY . .
+RUN pnpm run build
